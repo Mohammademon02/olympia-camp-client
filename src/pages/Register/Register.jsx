@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
     const onSubmit = (data) => {
 
@@ -18,67 +18,92 @@ const Register = () => {
                     className="w-full max-w-md bg-white p-6 rounded shadow-md"
                     onSubmit={handleSubmit(onSubmit)}
                 >
+
+                    {/* Name  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                             Name
                         </label>
                         <input
-                            {...register('name')}
+                            {...register('name', { required: true })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text"
-                            required
                         />
+                        {errors.name && <span className="text-red-500">Name is required</span>}
                     </div>
 
+                    {/* Email  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                             Email
                         </label>
                         <input
-                            {...register('email')}
+                            {...register('email', { required: true })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="email"
-                            required
                         />
+                        {errors.email && <span className="text-red-500">Email is required</span>}
                     </div>
 
+                    {/* password  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
                         <input
-                            {...register('password')}
+                            {...register('password', {
+                                required: true,
+                                minLength: 6,
+                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                            })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="password"
-                            required
                         />
+                        {errors.password && errors.password.type === 'minLength' && (
+                            <span className="text-red-500 text-sm mt-1">
+                                Password must be at least 6 characters long.
+                            </span>
+                        )}
+                        {errors.password && errors.password.type === 'pattern' && (
+                            <span className="text-red-500 text-sm mt-1">
+                                Password must contain at least one uppercase letter, one lowercase letter, one special character, and one digit.
+                            </span>
+                        )}
                     </div>
 
+
+                    {/* confirm password  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Confirm Password
                         </label>
                         <input
-                            {...register('confirmPassword')}
+                            {...register('confirmPassword', {
+                                required: true,
+                                validate: (value) => value === watch('password'),
+                            })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="password"
-                            required
                         />
+                        {errors.confirmPassword && (
+                            <span className="text-red-500">Passwords do not match</span>
+                        )}
                     </div>
 
-
+                    {/* photo  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photoURL">
                             Photo URL
                         </label>
                         <input
-                            {...register('photoURL')}
+                            {...register('photoURL', { required: true })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="url"
-                            required
+
                         />
                     </div>
 
+                    {/* register button  */}
                     <div className="mb-4">
                         <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"

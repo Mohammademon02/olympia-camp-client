@@ -6,7 +6,7 @@ import { AiFillLock, AiFillUnlock } from 'react-icons/ai';
 
 const Login = () => {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -24,28 +24,31 @@ const Login = () => {
                     className="w-full max-w-md bg-white p-6 rounded shadow-md"
                     onSubmit={handleSubmit(onSubmit)}
                 >
+
+                    {/* email */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                             Email
                         </label>
                         <input
-                            {...register('email')}
+                            {...register('email', { required: true })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="email"
-                            required
                         />
+                        {errors.email && <span className="text-red-500">Email is required</span>}
                     </div>
 
+                    {/* password  */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
                         <div className="relative">
                             <input
-                                {...register('password')}
+                                {...register('password', { required: true })}
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
                                 type={showPassword ? 'text' : 'password'}
-                                required
+
                             />
                             <div
                                 className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -58,8 +61,10 @@ const Login = () => {
                                 )}
                             </div>
                         </div>
+                        {errors.email && <span className="text-red-500">Please provide valid password</span>}
                     </div>
 
+                    {/* Login button  */}
                     <div className="mb-4">
                         <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"
