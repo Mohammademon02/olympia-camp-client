@@ -48,34 +48,30 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
-                        user ?
-
-                            <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    <span>
+                        {
+                            user ?
+                                <span className="flex items-center">
                                     <div>
                                         {
                                             user?.photoURL ?
                                                 <div className="w-10 rounded-full">
-                                                    <img src={user?.photoURL} />
+                                                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                                 </div>
                                                 :
-                                                <FaUser></FaUser>
+                                                <div className="w-10 rounded-full">
+                                                    <FaUser></FaUser>
+                                                </div>
                                         }
                                     </div>
-                                </label>
-                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li>
-                                        <a className="justify-between">
-                                            Profile
-                                        </a>
-                                    </li>
-                                    <li onClick={handleLogOut}><Link>Logout</Link></li>
-                                </ul>
-                            </div>
-                            :
-                            <Link to="/login" className="btn">Login</Link>
-                    }
+                                    <Link onClick={handleLogOut} className="btn">Logout</Link>
+                                </span>
+                                :
+                                <span>
+                                    <Link to="/login" className="btn">Login</Link>
+                                </span>
+                        }
+                    </span>
                 </div>
             </div>
         </>
