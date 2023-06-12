@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AiFillLock, AiFillUnlock } from 'react-icons/ai';
+import { AuthContext } from "../../context/AuthProvider";
 
 
 const Login = () => {
@@ -9,9 +10,19 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
+    const { signIn } = useContext(AuthContext);
+
 
     const onSubmit = (data) => {
         console.log(data);
+        signIn(data.email, data.password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -61,7 +72,7 @@ const Login = () => {
                                 )}
                             </div>
                         </div>
-                        {errors.email && <span className="text-red-500">Please provide valid password</span>}
+                        {errors.password && <span className="text-red-500">Please provide valid password</span>}
                     </div>
 
                     {/* Login button  */}

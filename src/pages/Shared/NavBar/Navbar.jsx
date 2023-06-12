@@ -1,13 +1,32 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthProvider";
+import { FaUser } from 'react-icons/fa';
 
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+    }
+
+
 
     const navList = <>
         <li><Link>Home</Link></li>
         <li><Link>Instructor</Link></li>
         <li><Link>Classes</Link></li>
-        <li><Link>Dashboard</Link></li>
+        {
+            user ?
+                <>
+                    <li><Link>Dashboard</Link></li>
+                </>
+                :
+                <>
+                </>
+        }
     </>
     return (
         <>
@@ -21,7 +40,7 @@ const Navbar = () => {
                             {navList}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <a className="btn btn-ghost normal-case text-xl">Olympia Camp</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -29,7 +48,34 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn">Login</Link>
+                    {
+                        user ?
+
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div>
+                                        {
+                                            user?.photoURL ?
+                                                <div className="w-10 rounded-full">
+                                                    <img src={user?.photoURL} />
+                                                </div>
+                                                :
+                                                <FaUser></FaUser>
+                                        }
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li onClick={handleLogOut}><Link>Logout</Link></li>
+                                </ul>
+                            </div>
+                            :
+                            <Link to="/login" className="btn">Login</Link>
+                    }
                 </div>
             </div>
         </>
