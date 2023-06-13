@@ -10,7 +10,7 @@ const TopSlider = () => {
 
     return (
         <section>
-            <Carousel>
+            <Carousel autoPlay={true} infiniteLoop={true}>
                 <div>
                     <img src="https://i.ibb.co/ZzZd3mc/banner2.jpg" />
                 </div>
