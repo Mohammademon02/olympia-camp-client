@@ -6,10 +6,10 @@ import { useEffect } from "react";
 
 
 
-const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000/',
-});
 
+const axiosSecure = axios.create({
+    baseURL: 'http://localhost:5000',
+});
 
 const useAxiosSecure = () => {
     const { logOut } = useAuth();
@@ -34,7 +34,7 @@ const useAxiosSecure = () => {
                 return Promise.reject(error);
             }
         );
-    }, [logOut, navigate])
+    }, [logOut, navigate]);
 
     return [axiosSecure];
 };

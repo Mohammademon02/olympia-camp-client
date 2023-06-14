@@ -20,7 +20,7 @@ const Navbar = () => {
         {
             user ?
                 <>
-                    <li><Link>Dashboard</Link></li>
+                    <li><Link to="/dashboard">Dashboard</Link></li>
                 </>
                 :
                 <>

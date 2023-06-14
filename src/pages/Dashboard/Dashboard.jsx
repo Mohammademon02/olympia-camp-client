@@ -1,5 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
+import { FaCashRegister, FaHistory, FaPlusSquare, FaRegBookmark, FaTachometerAlt, FaTasks, FaUserEdit } from "react-icons/fa";
 
 
 const Dashboard = () => {
@@ -7,6 +10,8 @@ const Dashboard = () => {
     const { user } = useAuth();
     // const [isAdmin] = useAdmin();
     // const [isInstructor] = useInstructor();
+    const isAdmin = true;
+    const isInstructor = true;
 
 
     const userProfile = <div className='flex flex-col items-center mx-auto'>
@@ -75,3 +80,16 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
