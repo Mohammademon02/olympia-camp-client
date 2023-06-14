@@ -1,29 +1,48 @@
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { FcGoogle } from "react-icons/fc";
 
 
 const Register = () => {
 
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, googleSignIn, updateUserProfile } = useAuth();
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const onSubmit = (data) => {
-        console.log(data);
-
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email, photo: data.photoURL }
+                        console.log(saveUser);
+                    })
                 navigate("/")
             })
             .catch(error => {
                 console.error(error);
             })
     };
+
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <>
@@ -68,21 +87,18 @@ const Register = () => {
                             {...register('password', {
                                 required: true,
                                 minLength: 6,
-                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                maxLength: 20,
+                                pattern: /(?=.*[A-Z])/,
+                                pattern1: /(?=.*[!@#$&*])/
                             })}
                             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="password"
                         />
-                        {errors.password && errors.password.type === 'minLength' && (
-                            <span className="text-red-500 text-sm mt-1">
-                                Password must be at least 6 characters long.
-                            </span>
-                        )}
-                        {errors.password && errors.password.type === 'pattern' && (
-                            <span className="text-red-500 text-sm mt-1">
-                                Password must contain at least one uppercase letter, one lowercase letter, one special character, and one digit.
-                            </span>
-                        )}
+                        {errors.password?.type === 'required' && <p className="text-red-500">Password is required</p>}
+                        {errors.password?.type === 'minLength' && <p className="text-red-500">Password must be 6 characters</p>}
+                        {errors.password?.type === 'maxLength' && <p className="text-red-500">Password must be less than 20 characters</p>}
+                        {errors.password?.type === 'pattern' && <p className="text-red-500">Password must have one Uppercase</p>}
+                        {errors.password?.type === 'pattern1' && <p className="text-red-500">Password must have one Special Character</p>}
                     </div>
 
 
@@ -133,6 +149,22 @@ const Register = () => {
                                 Login
                             </Link>
                         </p>
+                    </div>
+                    <div className="flex flex-col w-full border-opacity-50">
+                        <div className="divider">OR</div>
+                    </div>
+                    <div className="w-full">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            type="button"
+                            className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-full px-4 py-3 border border-gray-300 "
+                        >
+                            <div className="flex items-center justify-center ">
+                                <FcGoogle></FcGoogle>
+                                <span className="ml-2">Login with Google</span>
+                            </div>
+                        </button>
+                        <br />
                     </div>
                 </form>
             </div>

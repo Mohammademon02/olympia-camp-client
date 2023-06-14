@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/AuthProvider";
 import { FaUser } from 'react-icons/fa';
+import useAuth from "../../../Hooks/useAuth";
 
 
 const Navbar = () => {
 
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut } = useAuth();
+    console.log(user?.photoURL);
 
     const handleLogOut = () => {
         logOut()
@@ -56,7 +56,7 @@ const Navbar = () => {
                                         {
                                             user?.photoURL ?
                                                 <div className="w-10 rounded-full">
-                                                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                    <img className="rounded-full" src={user?.photoURL} />
                                                 </div>
                                                 :
                                                 <div className="w-10 rounded-full">
@@ -64,7 +64,7 @@ const Navbar = () => {
                                                 </div>
                                         }
                                     </div>
-                                    <Link onClick={handleLogOut} className="btn">Logout</Link>
+                                    <Link onClick={handleLogOut} className="btn ml-2">Logout</Link>
                                 </span>
                                 :
                                 <span>

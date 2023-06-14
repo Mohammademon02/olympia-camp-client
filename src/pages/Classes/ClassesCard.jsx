@@ -14,7 +14,7 @@ const ClassesCard = ({ classItem }) => {
                     <p><strong>Available Seats:</strong> {availableSeats}</p>
                     <p><strong>Price:</strong> ${price}</p>
                     <div className="">
-                        <button className='btn btn-neutral border-none'>Enroll</button>
+                        <button className='btn btn-neutral border-none'>Enroll Now</button>
                     </div>
                 </div>
             </div>
