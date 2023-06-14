@@ -11,7 +11,6 @@ const Classes = () => {
         .then(data => setClasses(data))
     } ,[])
 
-    console.log(classes);
 
     return (
         <div>

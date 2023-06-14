@@ -1,6 +1,59 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 const ManageUsers = () => {
+
+    const [axiosSecure] = useAxiosSecure();
+    const { data: users = [], refetch } = useQuery(['users'], async () => {
+        const res = await axiosSecure.get(`/users`)
+        return res.data;
+    })
+
+    // const [users, setUsers] = useState();
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/users')
+    //     .then(res => res.json())
+    //     .then(data => setUsers(data))
+    // }, [])
+
+
+    const handleMakeAdmin = user => {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ role: 'admin' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount) {
+                    refetch();
+                }
+            });
+    };
+
+    const handleMakeInstructor = user => {
+        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ role: 'instructor' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount) {
+                    refetch();
+                }
+            });
+    };
+
+
     return (
         <div>
             <div className="overflow-x-auto">
@@ -8,7 +61,7 @@ const ManageUsers = () => {
                     {/* head */}
                     <thead>
                         <tr className='text-lg font-bold text-gray-600 bg-amber-50'>
-                            <th>SL No.</th>
+                            <th>Sl No.</th>
                             <th>Name</th>
                             <th>Role</th>
                             <th>Make Admin</th>
@@ -18,7 +71,7 @@ const ManageUsers = () => {
                     <tbody>
 
                         {
-                            users.map((user, index) => <tr key={user._id}>
+                            users?.map((user, index) => <tr key={user._id}>
 
                                 <th>{index + 1}</th>
                                 <td>

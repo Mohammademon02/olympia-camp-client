@@ -2,28 +2,17 @@ import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
-import { FaCashRegister, FaHistory, FaPlusSquare, FaRegBookmark, FaTachometerAlt, FaTasks, FaUserEdit } from "react-icons/fa";
+import { FaCashRegister, FaHistory, FaHome, FaPlusSquare, FaRegBookmark, FaTachometerAlt, FaTasks, FaUserEdit } from "react-icons/fa";
 
 
 const Dashboard = () => {
 
     const { user } = useAuth();
-    // const [isAdmin] = useAdmin();
-    // const [isInstructor] = useInstructor();
-    const isAdmin = true;
-    const isInstructor = true;
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
 
-
-    const userProfile = <div className='flex flex-col items-center mx-auto'>
-        <div className="avatar">
-            <div className="w-24 mask mask-squircle">
-                <img src={user.photoURL} />
-            </div>
-        </div>
-        <div>
-            <h2 className="card-title mt-3">{user.displayName}</h2>
-        </div>
-    </div>
+    // const isAdmin = true;
+    // const isInstructor = true;
 
 
     return (
@@ -42,7 +31,16 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu text-lg space-y-3 font-semibold p-4 w-80 h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
-                        {userProfile}
+                        <div className='flex flex-col items-center mx-auto'>
+                            <div className="avatar">
+                                <div className="w-24 mask mask-squircle">
+                                    <img src={user.photoURL} />
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="card-title mt-3">{user.displayName}</h2>
+                            </div>
+                        </div>
 
                         <div className="divider"></div>
 
@@ -70,6 +68,11 @@ const Dashboard = () => {
                                 <li><Link to='/dashboard/manageUsers'><FaUserEdit></FaUserEdit> Manage Users</Link></li>
                             </>
                         }
+
+                        <div className="divider"></div>
+
+
+                        <li><Link to="/"><FaHome></FaHome> Home</Link></li>
 
                     </ul>
 
