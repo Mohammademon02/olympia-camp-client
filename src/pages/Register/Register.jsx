@@ -1,18 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import { FcGoogle } from "react-icons/fc";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 
 const Register = () => {
 
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
 
-    const { createUser, googleSignIn, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
     const onSubmit = (data) => {
         createUser(data.email, data.password)
@@ -23,26 +21,29 @@ const Register = () => {
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email, photo: data.photoURL }
                         console.log(saveUser);
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if (data.insertedId) {
+                                    reset();
+                                    navigate("/")
+                                }
+                            })
                     })
-                navigate("/")
+
             })
             .catch(error => {
                 console.error(error);
             })
     };
 
-
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-                navigate(from, { replace: true });
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
 
     return (
         <>
@@ -150,22 +151,7 @@ const Register = () => {
                             </Link>
                         </p>
                     </div>
-                    <div className="flex flex-col w-full border-opacity-50">
-                        <div className="divider">OR</div>
-                    </div>
-                    <div className="w-full">
-                        <button
-                            onClick={handleGoogleSignIn}
-                            type="button"
-                            className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-full px-4 py-3 border border-gray-300 "
-                        >
-                            <div className="flex items-center justify-center ">
-                                <FcGoogle></FcGoogle>
-                                <span className="ml-2">Login with Google</span>
-                            </div>
-                        </button>
-                        <br />
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </form>
             </div>
         </>

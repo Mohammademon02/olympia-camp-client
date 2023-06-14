@@ -6,7 +6,6 @@ import useAuth from "../../../Hooks/useAuth";
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
-    console.log(user?.photoURL);
 
     const handleLogOut = () => {
         logOut()
