@@ -17,9 +17,7 @@ const MyClasses = () => {
 
     const handleEditClass = (event, classCard) => {
         event.preventDefault();
-
         const form = event.target;
-
         const className = form.className.value;
         const classImage = form.classImage.value;
         const availableSeats = parseInt(form.availableSeats.value);
