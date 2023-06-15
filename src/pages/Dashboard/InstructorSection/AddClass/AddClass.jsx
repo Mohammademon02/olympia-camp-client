@@ -3,25 +3,39 @@ import useAuth from "../../../../Hooks/useAuth";
 
 const AddClass = () => {
 
-    const {user} = useAuth();
+    const { user } = useAuth();
 
-    const handleAddClass = event => {
+    const handleAddClass = (event) => {
         event.preventDefault();
 
         const form = event.target;
 
         const className = form.className.value;
-        const classImage = form.classImage.value;
+        const image = form.classImage.value;
         const instructorName = form.instructorName.value;
         const instructorEmail = form.instructorEmail.value;
         const availableSeats = parseInt(form.availableSeats.value);
         const price = parseInt(form.price.value);
 
 
-        const newClass = { className, classImage, instructorName, instructorEmail, availableSeats, price }
+        const newClass = { className, image, instructorName, instructorEmail, availableSeats, price }
 
         console.log(newClass);
 
+        fetch('http://localhost:5000/classes', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newClass)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    form.reset();
+                }
+            })
     }
 
     return (
