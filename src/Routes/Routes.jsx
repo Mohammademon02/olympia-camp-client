@@ -13,6 +13,7 @@ import ManageClasses from "../pages/Dashboard/AdminSection/ManageClasses/ManageC
 import InstructorRoute from "./InstructorRoute";
 import AddClass from "../pages/Dashboard/InstructorSection/AddClass/AddClass";
 import MyClasses from "../pages/Dashboard/InstructorSection/MyClasses/MyClasses";
+import MySelectedClasses from "../pages/Dashboard/StudentSection/MySelectedClasses/MySelectedClasses";
 
 
 
@@ -69,6 +70,13 @@ export const router = createBrowserRouter([
             {
                 path: 'myClasses',
                 element: <InstructorRoute><MyClasses></MyClasses></InstructorRoute>
+            },
+
+            // student section
+
+            {
+                path: 'mySelectedClasses',
+                element: <MySelectedClasses></MySelectedClasses>
             }
         ]
     }

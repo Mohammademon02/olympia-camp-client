@@ -63,7 +63,7 @@ const ClassesCard = ({ classItem }) => {
                     <p><strong>Instructor Name:</strong> {instructorName}</p>
                     <p><strong>Available Seats:</strong> {availableSeats}</p>
                     <p><strong>Price:</strong> ${price}</p>
-                    <div className="">
+                    <div >
                         {
                             (availableSeats === 0 || isAdmin || isInstructor || alreadyExist) ? <button className='btn btn-neutral border-none' disabled>Select</button> : <button onClick={() => handleSelectedClass(classItem?._id)} className='btn btn-neutral border-none'>Select</button>
                         }
