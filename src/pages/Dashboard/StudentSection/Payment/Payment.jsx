@@ -37,7 +37,7 @@ const Payment = ({ closeModal, isOpen, selectedClass }) => {
                             <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                 <Dialog.Title
                                     as="h3"
-                                    className="text-xl font-medium text-center leading-6 text-gray-900"
+                                    className="text-xl mb-3 font-medium text-center leading-6 text-gray-900"
                                 >
                                     Make Payment
                                 </Dialog.Title>

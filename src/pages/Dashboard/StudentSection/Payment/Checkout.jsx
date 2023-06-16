@@ -19,8 +19,7 @@ const Checkout = ({ selectedClass, closeModal }) => {
 
     useEffect(() => {
         if (selectedClass.price > 0) {
-            axiosSecure
-                .post("/create-payment-intent", { price: selectedClass.price })
+            axiosSecure.post("/create-payment-intent", { price: selectedClass.price })
                 .then((res) => {
                     setClientSecret(res.data.clientSecret);
                 });
@@ -92,9 +91,10 @@ const Checkout = ({ selectedClass, closeModal }) => {
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     if (res.data.insertedId) {
-                        console.log(res.data);
+                    console.log(res.data);
                     }
                 })
+                navigate('/dashboard/myEnrolledClasses')
         }
     };
 
@@ -118,7 +118,7 @@ const Checkout = ({ selectedClass, closeModal }) => {
                     }}
                 />
 
-                <div className="flex mt-2 justify-around">
+                <div className="flex mt-7 justify-around">
                     <button
                         type="button"
                         className="btn btn-neutral btn-sm"
