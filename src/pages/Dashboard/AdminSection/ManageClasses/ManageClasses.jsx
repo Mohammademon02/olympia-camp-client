@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import FeedbackModal from "./FeedbackModal";
 
- 
+
 const ManageClasses = () => {
 
     const { data: classes = [], refetch } = useQuery(['classes'], async () => {
@@ -132,8 +132,6 @@ const ManageClasses = () => {
                                 </th>
                             </tr>)
                         }
-
-
 
                     </tbody>
 

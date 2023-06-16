@@ -71,7 +71,6 @@ const Dashboard = () => {
 
                         <div className="divider"></div>
 
-
                         <li><Link to="/"><FaHome></FaHome> Home</Link></li>
 
                     </ul>
