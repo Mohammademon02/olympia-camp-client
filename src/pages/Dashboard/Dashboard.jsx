@@ -33,7 +33,7 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <div className='flex flex-col items-center mx-auto'>
                             <div className="avatar">
-                                <div className="w-24 mask mask-squircle">
+                                <div className="w-24 mask mask-circle">
                                     <img src={user.photoURL} />
                                 </div>
                             </div>
