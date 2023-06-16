@@ -82,7 +82,7 @@ const Checkout = ({ selectedClass, closeModal }) => {
                 date: new Date(),
                 id: selectedClass._id,
                 classId: selectedClass.classId,
-                classImage: selectedClass.classImage,
+                image: selectedClass.image,
                 status: 'Payment Successful',
                 className: selectedClass.className,
                 instructorName: selectedClass.instructorName
