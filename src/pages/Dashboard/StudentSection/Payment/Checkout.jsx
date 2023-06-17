@@ -3,6 +3,7 @@ import useAuth from "../../../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 
 const Checkout = ({ selectedClass, closeModal }) => {
@@ -73,7 +74,12 @@ const Checkout = ({ selectedClass, closeModal }) => {
         console.log("payment intent", paymentIntent);
 
         if (paymentIntent.status === "succeeded") {
-
+            Swal.fire({
+                title: 'Payment Successful!',
+                text: `TransactionId: ${paymentIntent.id}`,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
             // save payment information to the server
             const payment = {
                 email: user?.email,
@@ -121,7 +127,7 @@ const Checkout = ({ selectedClass, closeModal }) => {
                 <div className="flex mt-7 justify-around">
                     <button
                         type="button"
-                        className="btn btn-neutral btn-sm"
+                        className="btn btn-outline btn-error btn-sm"
                         onClick={closeModal}
                     >
                         Cancel
@@ -129,7 +135,7 @@ const Checkout = ({ selectedClass, closeModal }) => {
                     <button
                         type="submit"
                         disabled={!stripe || !clientSecret || processing}
-                        className="btn btn-success btn-sm"
+                        className="btn btn-outline btn-success btn-sm"
                     >
                         {`Pay $${selectedClass?.price}`}
                     </button>

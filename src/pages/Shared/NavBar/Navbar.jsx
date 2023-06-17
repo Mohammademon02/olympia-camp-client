@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaUser } from 'react-icons/fa';
 import useAuth from "../../../Hooks/useAuth";
 
@@ -11,22 +11,31 @@ const Navbar = () => {
         logOut()
     }
 
+    const navLinkStyle = ({ isActive }) => {
+        return {
+            background: isActive ? 'linear-gradient(90deg, #1CB5E0 0%, #000851 100%)' : "",
+            color: isActive ? 'white' : "",
+        }
+    }
+
 
 
     const navList = <>
-        <li><Link>Home</Link></li>
-        <li><Link to="/instructor" >Instructor</Link></li>
-        <li><Link to="/classes">Classes</Link></li>
+        <li><NavLink className="px-3 py-2 rounded ml-2" style={navLinkStyle} to="/" >Home</NavLink></li>
+        <li><NavLink className="px-3 py-2 rounded ml-2" style={navLinkStyle} to="/instructor" >Instructor</NavLink></li>
+        <li><NavLink className="px-3 py-2 rounded ml-2" style={navLinkStyle} to="/classes">Classes</NavLink></li>
         {
             user ?
                 <>
-                    <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><NavLink className="px-3 py-2 rounded ml-2" style={navLinkStyle} to="/dashboard">Dashboard</NavLink></li>
                 </>
                 :
                 <>
                 </>
         }
     </>
+
+    
     return (
         <>
             <div className="navbar max-w-screen-xl bg-base-100">
@@ -42,7 +51,7 @@ const Navbar = () => {
                     <a className="btn btn-ghost normal-case text-xl">Olympia Camp</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-2">
                         {navList}
                     </ul>
                 </div>
@@ -63,11 +72,11 @@ const Navbar = () => {
                                                 </div>
                                         }
                                     </div>
-                                    <Link onClick={handleLogOut} className="btn ml-2">Logout</Link>
+                                    <Link onClick={handleLogOut} className="btn ml-2 bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white">Logout</Link>
                                 </span>
                                 :
                                 <span>
-                                    <Link to="/login" className="btn">Login</Link>
+                                    <Link to="/login" className="btn bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white">Login</Link>
                                 </span>
                         }
                     </span>

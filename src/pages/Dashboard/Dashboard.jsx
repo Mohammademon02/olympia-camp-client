@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
@@ -13,6 +13,14 @@ const Dashboard = () => {
 
     // const isAdmin = true;
     // const isInstructor = true;
+
+
+    const navLinkStyle = ({ isActive }) => {
+        return {
+            background: isActive ? 'linear-gradient(90deg, #1CB5E0 0%, #000851 100%)' : "",
+            color: isActive ? 'white' : "",
+        }
+    }
 
 
     return (
@@ -47,31 +55,31 @@ const Dashboard = () => {
                         {/* Student */}
                         {
                             (!isAdmin && !isInstructor) && <>
-                                <li><Link to='/dashboard/mySelectedClasses'><FaRegBookmark></FaRegBookmark> My Selected Classes</Link></li>
-                                <li><Link to='/dashboard/myEnrolledClasses'><FaCashRegister></FaCashRegister> My Enrolled Classes</Link></li>
-                                <li><Link to='/dashboard/paymentHistory'><FaHistory></FaHistory> Payment History</Link></li>
+                                <li><NavLink to='/dashboard/mySelectedClasses' className="px-3 py-2 rounded" style={navLinkStyle}><FaRegBookmark></FaRegBookmark> My Selected Classes</NavLink></li>
+                                <li><NavLink to='/dashboard/myEnrolledClasses' className="px-3 py-2 rounded" style={navLinkStyle}><FaCashRegister></FaCashRegister> My Enrolled Classes</NavLink></li>
+                                <li><NavLink to='/dashboard/paymentHistory' className="px-3 py-2 rounded" style={navLinkStyle}><FaHistory></FaHistory> Payment History</NavLink></li>
                             </>
                         }
 
                         {/* Instructor */}
                         {
                             isInstructor && <>
-                                <li><Link to='/dashboard/addClass'><FaPlusSquare></FaPlusSquare> Add a Class</Link></li>
-                                <li><Link to='/dashboard/myClasses'><FaTachometerAlt></FaTachometerAlt> My Classes</Link></li>
+                                <li><NavLink to='/dashboard/addClass' className="px-3 py-2 rounded" style={navLinkStyle}><FaPlusSquare></FaPlusSquare> Add a Class</NavLink></li>
+                                <li><NavLink to='/dashboard/myClasses' className="px-3 py-2 rounded" style={navLinkStyle}><FaTachometerAlt></FaTachometerAlt> My Classes</NavLink></li>
                             </>
                         }
 
                         {/* Admin */}
                         {
                             isAdmin && <>
-                                <li><Link to='/dashboard/manageClasses'><FaTasks></FaTasks> Manage Classes</Link></li>
-                                <li><Link to='/dashboard/manageUsers'><FaUserEdit></FaUserEdit> Manage Users</Link></li>
+                                <li><NavLink to='/dashboard/manageClasses' className="px-3 py-2 rounded" style={navLinkStyle}><FaTasks></FaTasks> Manage Classes</NavLink></li>
+                                <li><NavLink to='/dashboard/manageUsers' className="px-3 py-2 rounded" style={navLinkStyle}><FaUserEdit></FaUserEdit> Manage Users</NavLink></li>
                             </>
                         }
 
                         <div className="divider"></div>
 
-                        <li><Link to="/"><FaHome></FaHome> Home</Link></li>
+                        <li><NavLink to="/" className="px-3 py-2 rounded" style={navLinkStyle}><FaHome></FaHome> Home</NavLink></li>
 
                     </ul>
 

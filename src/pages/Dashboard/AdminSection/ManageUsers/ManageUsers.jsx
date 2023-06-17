@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const ManageUsers = () => {
@@ -31,6 +32,13 @@ const ManageUsers = () => {
             .then(data => {
                 console.log(data);
                 if (data.modifiedCount) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an Admin Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     refetch();
                 }
             });
@@ -48,6 +56,13 @@ const ManageUsers = () => {
             .then(data => {
                 console.log(data);
                 if (data.modifiedCount) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an Instructor Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     refetch();
                 }
             });
@@ -96,12 +111,12 @@ const ManageUsers = () => {
                                 </td>
                                 <td>
                                     {
-                                        user?.role === 'admin' ? <button className="btn btn-neutral btn-xs capitalize" disabled>Make Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn btn-neutral btn-xs capitalize">Make Admin</button>
+                                        user?.role === 'admin' ? <button className="btn btn-neutral btn-xs capitalize" disabled>Make Admin</button> : <button onClick={() => handleMakeAdmin(user)} className="btn btn-error btn-xs capitalize">Make Admin</button>
                                     }
                                 </td>
                                 <th>
                                     {
-                                        user?.role === 'instructor' ? <button className="btn btn-neutral btn-xs capitalize" disabled>Make Instructor</button> : <button onClick={() => handleMakeInstructor(user)} className="btn btn-neutral btn-xs capitalize">Make Instructor</button>
+                                        user?.role === 'instructor' ? <button className="btn btn-neutral btn-xs capitalize" disabled>Make Instructor</button> : <button onClick={() => handleMakeInstructor(user)} className="btn btn-success btn-xs capitalize">Make Instructor</button>
                                     }
                                 </th>
                             </tr>)

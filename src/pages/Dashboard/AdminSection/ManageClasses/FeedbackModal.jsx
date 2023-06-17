@@ -20,7 +20,7 @@ const FeedbackModal = ({ classCard, handleSendFeedback }) => {
                                 </label>
                             </div>
                         </div>
-                        <input type="submit" value="Send Feedback" className="btn btn-block btn-success border-none" />
+                        <input type="submit" value="Send Feedback" className="btn btn-block bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white border-none" />
                     </form>
                 </div>
             </div>

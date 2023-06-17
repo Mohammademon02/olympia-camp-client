@@ -20,7 +20,7 @@ const SelectedClassList = ({ selectedClass, index, handleDelete }) => {
             <td>{selectedClass?.instructorName}</td>
             <td>${selectedClass?.price}</td>
             <td>
-                <Link onClick={() => setModal(true)} className="btn btn-square btn-neutral btn-sm">Pay</Link>
+                <Link onClick={() => setModal(true)} className="btn btn-square btn-success btn-sm">Pay</Link>
             </td>
             <td>
                 <button onClick={() => handleDelete(selectedClass?._id)} className="btn btn-circle hover:bg-red-500 hover:text-white">

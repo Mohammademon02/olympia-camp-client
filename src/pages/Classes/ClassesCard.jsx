@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import useInstructor from "../../Hooks/useInstructor";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const ClassesCard = ({ classItem }) => {
@@ -49,7 +50,15 @@ const ClassesCard = ({ classItem }) => {
             .then(data => {
                 console.log(data);
                 if (data.insertedId) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class successfully selected.',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
                     refetch();
+
                 }
             })
     }
@@ -65,7 +74,7 @@ const ClassesCard = ({ classItem }) => {
                     <p><strong>Price:</strong> ${price}</p>
                     <div >
                         {
-                            (availableSeats === 0 || isAdmin || isInstructor || alreadyExist) ? <button className='btn btn-neutral border-none' disabled>Select</button> : <button onClick={() => handleSelectedClass(classItem?._id)} className='btn btn-neutral border-none'>Select</button>
+                            (availableSeats === 0 || isAdmin || isInstructor || alreadyExist) ? <button className='btn btn-neutral border-none' disabled>Select</button> : <button onClick={() => handleSelectedClass(classItem?._id)} className='btn bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white border-none'>Select</button>
                         }
                     </div>
                 </div>

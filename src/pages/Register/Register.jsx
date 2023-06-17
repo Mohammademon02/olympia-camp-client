@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
@@ -33,6 +34,13 @@ const Register = () => {
                                 console.log(data);
                                 if (data.insertedId) {
                                     reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 2500
+                                    });
                                     navigate("/")
                                 }
                             })
@@ -137,7 +145,7 @@ const Register = () => {
                     {/* register button  */}
                     <div className="mb-4">
                         <button
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"
+                            className="bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             Register

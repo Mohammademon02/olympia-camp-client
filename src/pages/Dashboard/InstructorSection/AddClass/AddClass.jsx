@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useAuth from "../../../../Hooks/useAuth";
 
 
@@ -33,6 +34,12 @@ const AddClass = () => {
             .then(data => {
                 console.log(data);
                 if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'New class added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
                     form.reset();
                 }
             })
@@ -99,7 +106,7 @@ const AddClass = () => {
                     </div>
                 </div>
 
-                <input type="submit" value="Add Class" className="btn btn-block btn-success" />
+                <input type="submit" value="Add Class" className="w-full btn bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white" />
 
             </form>
         </div>

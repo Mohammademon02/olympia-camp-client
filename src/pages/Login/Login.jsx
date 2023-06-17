@@ -4,6 +4,7 @@ import { AiFillLock, AiFillUnlock } from 'react-icons/ai';
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -22,6 +23,13 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User Logged in successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 navigate(from, { replace: true })
             })
             .catch(error => {
@@ -82,7 +90,7 @@ const Login = () => {
                     {/* Login button  */}
                     <div className="mb-4">
                         <button
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"
+                            className="bg-gradient-to-r from-[#1CB5E0] to-[#000851] text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             Login
