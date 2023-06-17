@@ -23,7 +23,7 @@ const AddClass = () => {
 
         console.log(newClass);
 
-        fetch('http://localhost:5000/classes', {
+        fetch('https://olympia-camp-server.vercel.app/classes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -39,7 +39,7 @@ const ClassesCard = ({ classItem }) => {
         let email = user?.email;
         const selectedClass = { classId: _id, email, image, className, instructorName, availableSeats, price }
 
-        fetch('http://localhost:5000/selectedClasses', {
+        fetch('https://olympia-camp-server.vercel.app/selectedClasses', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

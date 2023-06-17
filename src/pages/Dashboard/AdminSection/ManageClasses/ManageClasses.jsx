@@ -7,13 +7,13 @@ import Swal from "sweetalert2";
 const ManageClasses = () => {
 
     const { data: classes = [], refetch } = useQuery(['classes'], async () => {
-        const res = await axios.get('http://localhost:5000/classes')
+        const res = await axios.get('https://olympia-camp-server.vercel.app/classes')
         return res.data;
     })
 
 
     const handleApprove = (classCard) => {
-        fetch(`http://localhost:5000/classes/approve/${classCard._id}`, {
+        fetch(`https://olympia-camp-server.vercel.app/classes/approve/${classCard._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const ManageClasses = () => {
     };
 
     const handleDeny = (classCard) => {
-        fetch(`http://localhost:5000/classes/deny/${classCard._id}`, {
+        fetch(`https://olympia-camp-server.vercel.app/classes/deny/${classCard._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ const ManageClasses = () => {
         const form = event.target;
         const feedback = form.feedback.value;
 
-        fetch(`http://localhost:5000/classes/feedback/${classCard._id}`, {
+        fetch(`https://olympia-camp-server.vercel.app/classes/feedback/${classCard._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

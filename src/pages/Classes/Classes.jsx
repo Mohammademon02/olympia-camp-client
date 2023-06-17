@@ -8,12 +8,12 @@ const Classes = () => {
     // const [classes, setClasses] = useState(); 
 
     const { data: classes = [], } = useQuery(['classes'], async () => {
-        const res = await axios.get('http://localhost:5000/classesList')
+        const res = await axios.get('https://olympia-camp-server.vercel.app/classesList')
         return res.data;
     })
 
     // useEffect(() =>{
-    //     fetch(`http://localhost:5000/classesList`)
+    //     fetch(`https://olympia-camp-server.vercel.app/classesList`)
     //     .then(res => res.json())
     //     .then(data => setClasses(data))
     // } ,[])

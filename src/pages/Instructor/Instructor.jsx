@@ -16,7 +16,7 @@ const Instructor = () => {
     })
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/instructors')
+    //     fetch('https://olympia-camp-server.vercel.app/instructors')
     //         .then(res => res.json())
     //         .then(data => setInstructors(data))
     // }, [])

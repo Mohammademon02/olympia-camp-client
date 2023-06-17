@@ -14,14 +14,14 @@ const ManageUsers = () => {
     // const [users, setUsers] = useState();
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/users')
+    //     fetch('https://olympia-camp-server.vercel.app/users')
     //     .then(res => res.json())
     //     .then(data => setUsers(data))
     // }, [])
 
 
     const handleMakeAdmin = user => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://olympia-camp-server.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ const ManageUsers = () => {
     };
 
     const handleMakeInstructor = user => {
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://olympia-camp-server.vercel.app/users/instructor/${user._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
