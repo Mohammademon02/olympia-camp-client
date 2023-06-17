@@ -34,7 +34,7 @@ const MySelectedClasses = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto">
+            <div className="overflow-auto">
                 <table className="table">
                     {/* head */}
                     <thead>

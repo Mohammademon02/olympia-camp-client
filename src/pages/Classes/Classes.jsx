@@ -1,21 +1,22 @@
+import { useEffect, useState } from "react";
 import ClassesCard from "./ClassesCard";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 
 
 const Classes = () => {
-    // const [classes, setClasses] = useState(); 
+    const [classes, setClasses] = useState(); 
 
-    const { data: classes = [], } = useQuery(['classes'], async () => {
-        const res = await axios.get('http://localhost:5000/classesList')
-        return res.data;
-    })
+    // const { data: classes = [], } = useQuery(['classes'], async () => {
+    //     const res = await axios.get('http://localhost:5000/classesList')
+    //     return res.data;
+    // })
 
-    // useEffect(() =>{
-    //     fetch(`http://localhost:5000/classesList`)
-    //     .then(res => res.json())
-    //     .then(data => setClasses(data))
-    // } ,[])
+    useEffect(() =>{
+        fetch(`http://localhost:5000/classesList`)
+        .then(res => res.json())
+        .then(data => setClasses(data))
+    } ,[])
 
 
     return (

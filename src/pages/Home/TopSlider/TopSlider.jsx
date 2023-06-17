@@ -1,31 +1,35 @@
 
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from  'react-responsive-carousel';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+
+
+
 
 
 const TopSlider = () => {
 
-  
+
 
 
     return (
-        <section>
-            <Carousel autoPlay={true} infiniteLoop={true}>
-                <div>
-                    <img src="https://i.ibb.co/ZzZd3mc/banner2.jpg" />
-                </div>
-                <div>
-                    <img src="https://i.ibb.co/7p0JQZW/banner1.jpg" />
-                </div>
-                <div>
-                    <img src="https://i.ibb.co/ZVCsLp2/banner3.jpg" />
-                </div>
-                <div>
-                    <img src="https://i.ibb.co/pxqxfGC/banner4.jpg" />
-                </div>
-            </Carousel>
-        </section>
+        <AwesomeSlider>
+            <div>
+                <img src="https://i.ibb.co/ZzZd3mc/banner2.jpg" />
+            </div>
+            <div>
+                <img src="https://i.ibb.co/7p0JQZW/banner1.jpg" />
+            </div>
+            <div>
+                <img src="https://i.ibb.co/ZVCsLp2/banner3.jpg" />
+            </div>
+            <div>
+                <img src="https://i.ibb.co/pxqxfGC/banner4.jpg" />
+            </div>
+        </AwesomeSlider>
     );
 };
 
 export default TopSlider;
+
+
+

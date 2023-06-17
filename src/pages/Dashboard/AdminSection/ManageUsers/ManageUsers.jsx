@@ -56,7 +56,7 @@ const ManageUsers = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto">
+            <div className="overflow-auto">
                 <table className="table tab-rounded-lg">
                     {/* head */}
                     <thead>

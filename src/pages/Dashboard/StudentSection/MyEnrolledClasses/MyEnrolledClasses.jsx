@@ -15,7 +15,7 @@ const MyEnrolledClasses = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto">
+            <div className="overflow-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -44,10 +44,8 @@ const MyEnrolledClasses = () => {
                                 </td>
                                 <td className="font-bold">{myEnrolledClass.instructorName}</td>
                                 <td>${myEnrolledClass.price}</td>
-
                             </tr>)
                         }
-
                     </tbody>
                 </table>
             </div>
